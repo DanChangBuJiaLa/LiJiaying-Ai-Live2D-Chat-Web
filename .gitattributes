@@ -1,0 +1,22 @@
+# 仓库内统一使用 LF：避免 Windows（core.autocrlf=true）与 Linux 之间来回转换
+* text=auto eol=lf
+
+# 二进制资源显式声明，避免被当作文本处理
+# （本项目会引入用户自备的 Live2D 模型、字体与语音资源）
+*.moc3 binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.mp3 binary
+*.wav binary
+*.zip binary
+
+# 依赖锁文件不计入 GitHub 语言统计，diff 也更干净
+package-lock.json linguist-generated
