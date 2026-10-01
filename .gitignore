@@ -105,3 +105,13 @@ vite.config.ts.timestamp-*
 # Temporary files
 *.tmp
 *.bak
+
+# Live2D 模型文件（仓库不内置任何模型二进制，规避版权风险）
+frontend/public/models/*
+!frontend/public/models/.gitkeep
+
+# Playwright 产物
+frontend/e2e/.artifacts/
+test-results/
+playwright-report/
+.pw-browsers/

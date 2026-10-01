@@ -1,0 +1,34 @@
+{
+  "name": "ai-live2d-chat-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "基于 Live2D 的 AI 虚拟角色 Web 聊天应用 | AI Virtual Character Chat with Live2D",
+  "license": "AGPL-3.0",
+  "workspaces": [
+    "packages/*",
+    "frontend",
+    "backend"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "concurrently -n backend,frontend -c magenta,cyan \"npm:dev:backend\" \"npm:dev:frontend\"",
+    "dev:frontend": "npm run dev -w frontend",
+    "dev:backend": "npm run dev -w backend",
+    "build": "npm run build -w frontend",
+    "typecheck": "npm run typecheck -w @ai-live2d/shared && npm run typecheck -w backend && npm run typecheck -w frontend && tsc --noEmit -p tsconfig.json",
+    "lint": "npm run lint -w backend && npm run lint -w frontend",
+    "test": "npm run test -w backend && npm run test -w frontend",
+    "test:e2e": "playwright test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "concurrently": "^9.1.2",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.3"
+  }
+}
