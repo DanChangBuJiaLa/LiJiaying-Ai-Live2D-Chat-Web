@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-cream: #fdf9f4;
+    --color-cream-deep: #f6ede4;
+    --color-cream-sunk: #efe3d8;
+    --color-pink: #ffb8c8;
+    --color-pink-soft: #ffd9e2;
+    --color-pink-deep: #f79cb0;
+    --color-yolk: #ffe3a3;
+    --color-yolk-soft: #fff1cc;
+    --color-mint: #b7e4d0;
+    --color-mint-soft: #dcf3e9;
+    --color-sky: #c7dcef;
+    --color-ink: #6b5b57;
+    --color-ink-soft: #9c8b86;
+    --color-ink-deep: #4a3e3b;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-cream);
+    color: var(--color-ink);
+    font-family:
+      'LXGW WenKai',
+      system-ui,
+      -apple-system,
+      'Segoe UI',
+      'Microsoft YaHei',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow: hidden;
+  }
+
+  /* 标题统一用圆润的站酷快乐体 */
+  h1,
+  h2,
+  h3 {
+    font-family: 'ZCOOL KuaiLe', 'LXGW WenKai', system-ui, sans-serif;
+    font-weight: 400;
+  }
+
+  ::selection {
+    background: var(--color-yolk);
+    color: var(--color-ink-deep);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-pink);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* 毛玻璃面板：草莓牛奶感的半透明卡片 */
+  .glass-panel {
+    background: linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.82) 0%,
+      rgba(255, 249, 244, 0.72) 100%
+    );
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+  }
+
+  .glass-dock {
+    background: rgba(255, 252, 249, 0.78);
+    backdrop-filter: blur(26px) saturate(160%);
+    -webkit-backdrop-filter: blur(26px) saturate(160%);
+  }
+
+  /* 纸纹噪点，避免大面积纯色显得塑料 */
+  .noise-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+  }
+
+  /* 柔和的滚动条，不打断整体氛围 */
+  .scroll-soft {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 184, 200, 0.55) transparent;
+  }
+
+  .scroll-soft::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scroll-soft::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scroll-soft::-webkit-scrollbar-thumb {
+    background: rgba(255, 184, 200, 0.5);
+    border-radius: 999px;
+  }
+
+  .scroll-soft::-webkit-scrollbar-thumb:hover {
+    background: rgba(247, 156, 176, 0.7);
+  }
+}
+
+/* 尊重系统的「减少动态效果」设置 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
