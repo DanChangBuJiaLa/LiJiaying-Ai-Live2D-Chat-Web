@@ -39,7 +39,7 @@ const REPLIES: Record<string, LLMResponse> = {
   },
   happy: {
     emotion: 'happy',
-    action: 'jump',
+    action: 'wave',
     expression: 'smile',
     text: '好耶！你这么一说我也超级开心的！嘿嘿～今天能量补充完毕！',
   },

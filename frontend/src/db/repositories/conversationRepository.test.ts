@@ -118,7 +118,7 @@ describe('messageRepository', () => {
         role: 'assistant',
         content: '第二条',
         emotion: 'happy',
-        action: 'jump',
+        action: 'wave',
         expression: 'smile',
       },
       database,

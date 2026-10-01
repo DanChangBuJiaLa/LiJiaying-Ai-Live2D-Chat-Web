@@ -32,7 +32,7 @@ describe('modelConfigRepository', () => {
   it('第一条配置自动激活，后续新增不会抢占', async () => {
     const first = await createModelConfig(baseDraft, database);
     const second = await createModelConfig(
-      { ...baseDraft, provider: 'deepseek', modelName: 'deepseek-chat' },
+      { ...baseDraft, provider: 'deepseek', modelName: 'deepseek-v4-pro' },
       database,
     );
 

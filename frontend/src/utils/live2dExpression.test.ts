@@ -23,15 +23,15 @@ describe('pickExpressionIndex', () => {
   it('模型没有同名表情时，按情绪固定顺序取模轮换', () => {
     // happy=0, sad=1, angry=2 → 与「至少 happy/sad/neutral 三档可切换」的验收一致
     expect(pickExpressionIndex(definitions, 'smile', 'happy')).toBe(0);
-    expect(pickExpressionIndex(definitions, 'cry', 'sad')).toBe(1);
-    expect(pickExpressionIndex(definitions, 'pout', 'angry')).toBe(2);
+    expect(pickExpressionIndex(definitions, 'frown', 'sad')).toBe(1);
+    expect(pickExpressionIndex(definitions, 'surprise', 'angry')).toBe(2);
     expect(pickExpressionIndex(definitions, 'blush', 'shy')).toBe(4);
   });
 
   it('表情数量少于情绪档位时取模，不会越界', () => {
     const few = [{ Name: 'a' }, { Name: 'b' }];
     expect(pickExpressionIndex(few, 'blush', 'shy')).toBe(0);
-    expect(pickExpressionIndex(few, 'cry', 'sad')).toBe(1);
+    expect(pickExpressionIndex(few, 'frown', 'sad')).toBe(1);
   });
 
   it('未识别的情绪回落到第一个表情', () => {

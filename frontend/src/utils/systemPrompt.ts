@@ -1,3 +1,4 @@
+import { ACTIONS, EMOTIONS, EXPRESSIONS } from '@shared';
 import type { ChatContextMessage, Character, MessageRole } from '@shared';
 
 /** 默认保留最近多少条消息作为上下文（用户可在模型配置里覆盖） */
@@ -8,12 +9,13 @@ export type PersonaSource = Pick<
   'name' | 'personality' | 'tone' | 'background' | 'catchphrase' | 'taboos'
 >;
 
+// 枚举值直接取自 @shared 的唯一来源，避免 Prompt 文案与前后端契约漂移
 const OUTPUT_FORMAT = [
   '【输出要求】必须严格返回 JSON，不要 Markdown 代码块，不要多余解释，格式：',
   '{',
-  '  "emotion": "happy|sad|angry|surprised|neutral|shy 中选一个（按你回复的语气选最匹配的）",',
-  '  "action": "greeting|wave|nod|shake|head_tilt|jump|hug|idle 中选一个（按当前动作场景选）",',
-  '  "expression": "smile|frown|surprise|blush|pout|cry|neutral 中选一个（与 emotion 对应）",',
+  `  "emotion": "${EMOTIONS.join('|')} 中选一个（按你回复的语气选最匹配的）",`,
+  `  "action": "${ACTIONS.join('|')} 中选一个（按当前动作场景选）",`,
+  `  "expression": "${EXPRESSIONS.join('|')} 中选一个（与 emotion 对应）",`,
   '  "text": "回复内容（严格按上面的语气风格，1-3 句话为主，不要太长；撒娇/害羞时可以加省略号、语气词、括号表情）"',
   '}',
 ].join('\n');

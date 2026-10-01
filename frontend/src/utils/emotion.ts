@@ -1,9 +1,12 @@
 import type { KnownAction, KnownExpression } from '@shared';
 
-/** 归一化后的情绪档位（LLM 可能返回任意字符串，都会被收敛到这 6 档） */
-export type EmotionKey = 'happy' | 'sad' | 'angry' | 'surprised' | 'shy' | 'neutral';
+/** 归一化后的情绪档位（LLM 可能返回任意字符串，都会被收敛到规格书定案的 7 档） */
+export type EmotionKey = 'happy' | 'sad' | 'angry' | 'surprised' | 'shy' | 'playful' | 'neutral';
 
-/** 固定顺序，用于在模型没有命名表情时按下标稳定轮换（同一情绪永远命中同一个表情） */
+/**
+ * 固定顺序，用于在模型没有命名表情时按下标稳定轮换（同一情绪永远命中同一个表情）。
+ * 顺序本身不承载语义，只要保持不变，表情就不会在不同对话间跳动。
+ */
 export const EMOTION_ORDER: readonly EmotionKey[] = [
   'happy',
   'sad',
@@ -11,6 +14,7 @@ export const EMOTION_ORDER: readonly EmotionKey[] = [
   'surprised',
   'shy',
   'neutral',
+  'playful',
 ];
 
 export interface EmotionVisual {
@@ -26,11 +30,11 @@ export interface EmotionVisual {
 }
 
 const TABLE: Record<EmotionKey, EmotionVisual> = {
-  happy: { emotion: 'happy', expression: 'smile', action: 'jump', glow: '#FFE3A3', label: '开心' },
-  sad: { emotion: 'sad', expression: 'cry', action: 'idle', glow: '#C7DCEF', label: '难过' },
+  happy: { emotion: 'happy', expression: 'smile', action: 'wave', glow: '#FFE3A3', label: '开心' },
+  sad: { emotion: 'sad', expression: 'frown', action: 'idle', glow: '#C7DCEF', label: '难过' },
   angry: {
     emotion: 'angry',
-    expression: 'pout',
+    expression: 'frown',
     action: 'shake',
     glow: '#F79CB0',
     label: '生气',
@@ -43,6 +47,13 @@ const TABLE: Record<EmotionKey, EmotionVisual> = {
     label: '惊讶',
   },
   shy: { emotion: 'shy', expression: 'blush', action: 'head_tilt', glow: '#FFB8C8', label: '害羞' },
+  playful: {
+    emotion: 'playful',
+    expression: 'blush',
+    action: 'head_tilt',
+    glow: '#FFD1B8',
+    label: '撒娇',
+  },
   neutral: {
     emotion: 'neutral',
     expression: 'neutral',
@@ -102,6 +113,14 @@ const SYNONYMS: Record<string, EmotionKey> = {
   害羞: 'shy',
   娇羞: 'shy',
   羞: 'shy',
+
+  playful: 'playful',
+  coquettish: 'playful',
+  mischievous: 'playful',
+  撒娇: 'playful',
+  撒嬌: 'playful',
+  卖萌: 'playful',
+  俏皮: 'playful',
 
   neutral: 'neutral',
   calm: 'neutral',

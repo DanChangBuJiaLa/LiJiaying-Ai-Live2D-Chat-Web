@@ -4,9 +4,10 @@ import { emotionToAction, emotionToExpression, resolveEmotion } from './emotion'
 describe('resolveEmotion', () => {
   it('识别标准情绪值并给出对应表情/动作', () => {
     expect(resolveEmotion('happy').expression).toBe('smile');
-    expect(resolveEmotion('happy').action).toBe('jump');
-    expect(resolveEmotion('sad').expression).toBe('cry');
+    expect(resolveEmotion('happy').action).toBe('wave');
+    expect(resolveEmotion('sad').expression).toBe('frown');
     expect(resolveEmotion('neutral').action).toBe('idle');
+    expect(resolveEmotion('playful').label).toBe('撒娇');
   });
 
   it('把同义词与大小写差异收敛到同一档', () => {
@@ -14,6 +15,7 @@ describe('resolveEmotion', () => {
     expect(resolveEmotion('JOYFUL').emotion).toBe('happy');
     expect(resolveEmotion(' 害羞 ').emotion).toBe('shy');
     expect(resolveEmotion('委屈').emotion).toBe('sad');
+    expect(resolveEmotion('撒娇').emotion).toBe('playful');
   });
 
   it('无法识别或字段缺失时回落到 neutral，而不是抛错', () => {

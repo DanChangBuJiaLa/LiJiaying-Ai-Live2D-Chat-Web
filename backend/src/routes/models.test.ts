@@ -46,7 +46,7 @@ describe('POST /api/models/test', () => {
         provider: 'deepseek',
         apiUrl: 'https://api.deepseek.com/v1',
         apiKey: 'sk-test',
-        modelName: 'deepseek-chat',
+        modelName: 'deepseek-v4-pro',
         contextWindow: 20,
       },
     });
@@ -66,7 +66,7 @@ describe('POST /api/models/test', () => {
         provider: 'deepseek',
         apiUrl: 'https://api.deepseek.com/v1',
         apiKey: '',
-        modelName: 'deepseek-chat',
+        modelName: 'deepseek-v4-pro',
         contextWindow: 20,
       },
     });

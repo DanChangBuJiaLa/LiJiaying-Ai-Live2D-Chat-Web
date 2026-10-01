@@ -3,31 +3,17 @@
  * 这些枚举是 LLM 结构化输出契约的一部分（见 项目规格说明书 3.3）。
  */
 
-/** LLM 返回的情绪分类（已知集合，实际接受任意字符串） */
-export const EMOTIONS = ['happy', 'sad', 'angry', 'surprised', 'neutral', 'shy'] as const;
+/**
+ * LLM 返回的情绪分类（7 种）
+ * 与 项目规格说明书 3.3 的「枚举值（唯一来源）」逐项一致；实际接受任意字符串，前端统一收敛到已知集合。
+ */
+export const EMOTIONS = ['happy', 'surprised', 'sad', 'angry', 'shy', 'playful', 'neutral'] as const;
 
-/** LLM 返回的表情名 */
-export const EXPRESSIONS = [
-  'smile',
-  'frown',
-  'surprise',
-  'blush',
-  'pout',
-  'cry',
-  'neutral',
-] as const;
+/** LLM 返回的表情名（5 种，见 项目规格说明书 3.3） */
+export const EXPRESSIONS = ['smile', 'frown', 'surprise', 'blush', 'neutral'] as const;
 
-/** LLM 返回的动作名 */
-export const ACTIONS = [
-  'greeting',
-  'wave',
-  'nod',
-  'shake',
-  'head_tilt',
-  'jump',
-  'hug',
-  'idle',
-] as const;
+/** LLM 返回的动作名（6 种，见 项目规格说明书 3.3） */
+export const ACTIONS = ['greeting', 'wave', 'nod', 'shake', 'head_tilt', 'idle'] as const;
 
 /** 支持的 LLM 厂商（全部走 OpenAI 兼容格式；mock 用于开发与降级兜底） */
 export const LLM_PROVIDERS = [
@@ -81,10 +67,10 @@ export const LLM_PROVIDER_PRESETS: Record<LLMProvider, LlmProviderPreset> = {
   },
   deepseek: {
     apiUrl: 'https://api.deepseek.com/v1',
-    modelName: 'deepseek-chat',
+    modelName: 'deepseek-v4-pro',
     requiresApiKey: true,
     testableRemotely: false,
-    hint: '性价比高，推荐首次接入使用',
+    hint: '引擎预设模型；旧版 deepseek-chat / deepseek-reasoner 已停用',
   },
   doubao: {
     apiUrl: 'https://ark.cn-beijing.volces.com/api/v3',
